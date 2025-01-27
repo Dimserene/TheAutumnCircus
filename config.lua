@@ -57,6 +57,7 @@ local config = {
 		planet_c = true,
 		planet_d = true,
 		nice_planet = true,
+		castle_planet = false,
 		blaze_planet = false,
 		twice_nice_planet = false,
 		skeet_planet = false,
