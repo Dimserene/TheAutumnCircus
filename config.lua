@@ -221,7 +221,7 @@ local config = {
 		othala = true,
 	},
 	enabled_hands = {
-		nice = true,
+		nice = false,
 		blaze = false,
 		twice_nice = false,
 		skeet = false,
