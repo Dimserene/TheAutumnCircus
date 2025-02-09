@@ -314,6 +314,7 @@ local jokers = {
     },
     'garden', garden = {
         name = "Garden",
+		subtitle = "Work In Progress!",
         text = {
             "{C:attention}Retrigger{} all played",
             "{C:attention}Grass{} and {C:attention}Dirt{} cards",
@@ -347,6 +348,7 @@ local jokers = {
     },
     'menagerie', menagerie = {
         name = "The Menagerie",
+		subtitle = "Work In Progress!",
         text = {
             "This Joker gains {X:mult,C:white} X#1# {} Mult",
             "if played hand contains",
@@ -390,13 +392,13 @@ local jokers = {
     'clown_posse', clown_posse = {
         name = "Clown Posse",
         text = {
-            "This Joker gains {X:mult,C:white} X#1# {} Mult",
-            "whenever another {C:attention}Joker{}",
-            "is gained",
+            "This Joker gains {X:mult,C:white} X#1# {}",
+            "Mult whenever another",
+            "{C:attention}Joker{} is gained",
             "{C:inactive}(Currently {X:mult,C:white} X#2# {C:inactive} Mult)"
         },
         config = {extra = {Xmult_mod = 0.10, xmult = 1.0}},
-        pos = { x = 0, y = 0 },
+        pos = { x = 4, y = 3 },
         cost = 6,
         rarity = 2,
         blueprint_compat = true,
@@ -407,7 +409,7 @@ local jokers = {
             return {vars = {card.ability.extra.Xmult_mod, card.ability.extra.xmult}}
         end,
         calculate = function(self, card, context)
-            if context.amm_added_card and context.other_card.config.center.set == "Joker" and not context.from_debuff and not context.blueprint then
+            if context.amm_added_card and context.other_card.ability.set == "Joker" and not context.from_debuff and not context.blueprint then
                 card.ability.extra.xmult = card.ability.extra.xmult + card.ability.extra.Xmult_mod
                 return {
                     card = card,
@@ -425,6 +427,7 @@ local jokers = {
     },
     'stellar_alignment', stellar_alignment = {
         name = "Stellar Alignment",
+		subtitle = "Work In Progress!",
         text = {
             "{C:attention}Retriggers{} each played",
             "{C:attention}Star{} card {C:attention}#1#{} time#2# for",
@@ -462,6 +465,7 @@ local jokers = {
     },
     'quantum_grass', quantum_grass = {
         name = "Quantum Grass Glass",
+		subtitle = "Work In Progress!",
         text = {
             "{C:attention}Glass{} cards and",
             "{C:attention}Grass{} cards are also",
@@ -498,6 +502,7 @@ local jokers = {
     },
     'psychic_double_reacharound', psychic_double_reacharound = {
         name = "Psychic Double Reacharound",
+		subtitle = "Work In Progress!",
         text = {
             "{C:attention}Retrigger{} each {C:attention}Joker{} that {C:attention}copies{}",
             "another {C:attention}Joker{} {C:attention}#1#{} time#2#"
@@ -528,6 +533,7 @@ local jokers = {
     },
     'knight_of_heart', knight_of_heart = {
         name = "Knight of Heart",
+		subtitle = "Work In Progress!",
         text = {
             "Played cards are {C:attention}converted{} to {C:hearts}Hearts{}",
             "and this Joker gains the following",
@@ -537,6 +543,7 @@ local jokers = {
             "{C:diamonds}Diamonds{}: {C:money}+$#5#{} at end of round {C:inactive}(Currently {C:money}$#6#{C:inactive})",
             "{C:attention}Other suits{}: {C:mult}+{X:mult,C:white} X#7# {} Mult {C:inactive}(Currently {X:mult,C:white} X#8# {C:inactive} Mult)"
         },
+		boxes = { 3, 1, 1, 1, 1, },
         config = {extra = {
             chips = 10,
             curr_chips = 0,
@@ -628,6 +635,7 @@ local jokers = {
     },
     'muse_of_mind', muse_of_mind = {
         name = "Maid of Mind",
+		subtitle = "Work In Progress!",
         text = {
             "Rescore each scoring Joker",
         },
@@ -660,6 +668,7 @@ local jokers = {
             "for each empty {C:attention}consumable slot{}",
             "{C:inactive}(Currently {X:mult,C:white} X#2# {C:inactive} Mult, {C:attention}#3#{C:inactive} retriggers)"
         },
+		boxes = { 2, 2, 1 },
         config = {extra = {
             Xmult = 0.13,
         }},
@@ -701,6 +710,7 @@ local jokers = {
     },
     'funny_fertilizer', funny_fertilizer = {
         name = "Funny Fertilizer",
+		subtitle = "Work In Progress!",
         text = {
             "{C:attention}Enhances{} up to {C:attention}#1#{}",
             "unenhanced card#2# in your full",
@@ -760,6 +770,7 @@ local jokers = {
             "This Joker {C:attention}improves{} at the",
             "end of each {C:attention}Boss Blind{}"
         },
+		boxes = { 2, 2, },
         config = {extra = { 
             reduction = 0.09,
             level_factor = 0.413,
@@ -825,6 +836,7 @@ local jokers = {
     },
     'daggerkind', daggerkind = {
         name = "Daggerkind Specibus",
+		subtitle = "Work In Progress!",
         text = {
             "When Blind is selected," 
         },
@@ -864,6 +876,7 @@ local jokers = {
     },
     'bladekind', bladekind = {
         name = "Bladekind Specibus",
+		subtitle = "Work In Progress!",
         text = {
             "e"
         },
@@ -902,6 +915,7 @@ local jokers = {
     },
     'pokerkind', pokerkind = {
         name = "Pokerkind Specibus",
+		subtitle = "Work In Progress!",
         text = {
             "e"
         },
@@ -940,6 +954,7 @@ local jokers = {
     },
     'combat_capability', combat_capability = {
         name = "Combat Capability",
+		subtitle = "Work In Progress!",
         text = {
             "If played hand contains no enhancements,",
             "each played card gets a random enhancement",
@@ -981,6 +996,7 @@ local jokers = {
     },
     'pseudoscratch', pseudoscratch = {
         name = "Pseudo-Scratch Gambit",
+		subtitle = "Work In Progress!",
         text = {
             "Prevent death, then this Joker",
             "becomes a random Joker from among:",
@@ -988,6 +1004,7 @@ local jokers = {
             "Maid of Mind",
             "Lord of Void",
         },
+		boxes = { 2, 3, },
         config = {},
         pos = { x = 7, y = 1 },
         cost = 9,
@@ -1031,6 +1048,46 @@ local jokers = {
         calculate = function(self, card, context)
         end,
         yes_pool_flag = "no",
+    },
+    'astront', astront = {
+        name = "Astron't Joker",
+		subtitle = "Work In Progress!",
+        text = {
+            "{C:green}#1# in #2#{} chance to",
+            "upgrade level of",
+            "{C:attention}suit{} of {C:attention}first{} card",
+            "used in scoring"
+        },
+        config = { extra = {
+            odds = 4,
+        }},
+        pos = { x = 0, y = 0 },
+        cost = 6,
+        rarity = 2,
+        blueprint_compat = true,
+        eternal_compat = true,
+        perishable_compat = true,
+        rental_compat = true,
+		loc_vars = function(self, info_queue, card)
+            return {vars = {
+                G.GAME.probabilities.normal,
+                card.ability.extra.odds
+            }}
+        end,
+        calculate = function(self, card, context)
+            if context.before and pseudorandom('astront') < G.GAME.probabilities.normal / card.ability.extra.odds then
+                if not SMODS.has_no_suit(context.scoring_hand[1]) then
+                    return {
+                        func = function()
+                            AMM.level_up_suit(context.blueprint_card or card, context.scoring_hand[1].base.suit)
+                            update_hand_text({delay = 0}, {handname = localize(context.scoring_name, "poker_hands"),chips = hand_chips, mult = mult, level = nil })
+                        end,
+                        card = card,
+                        message = localize('k_level_up_ex')
+                    }
+                end
+            end
+        end,
     },
 }
 
