@@ -928,6 +928,54 @@ local planets = {
 			end
 		end,
 	},
+	'shooting_star', shooting_star = {
+		name = "Shooting Star",
+		subtitle = "Look out it's got a gun!",
+		text = suitplanettext,
+		effect = 'Suit Level Upgrade',
+		config = {level_suit = "six_Stars"},
+		pos = { x = 4, y = 3 },
+		loc_vars = suitplanetloc_vars,
+		use = function(self, card, area, copier)
+			local used_tarot = copier or card
+			AMM.level_up_suit(used_tarot, self.config.level_suit)
+		end,
+		can_use = function(self, card) return true end,
+		set_badges = function(self, card, badges)
+			if self.discovered then
+				badges[1].nodes[1].nodes[2].config.object:remove()
+				badges[1] = create_badge("Star?", get_type_colour(self or card.config, card), nil, 1.2)
+				return badges
+			end
+		end,
+		load_check = function()
+			return next(SMODS.find_mod('SixSuits'))
+		end,
+	},
+	'chill_moon', chill_moon = {
+		name = "Chill Moon",
+		subtitle = "That moon has sunglasses on?",
+		text = suitplanettext,
+		effect = 'Suit Level Upgrade',
+		config = {level_suit = "six_Moons"},
+		pos = { x = 5, y = 3 },
+		loc_vars = suitplanetloc_vars,
+		use = function(self, card, area, copier)
+			local used_tarot = copier or card
+			AMM.level_up_suit(used_tarot, self.config.level_suit)
+		end,
+		can_use = function(self, card) return true end,
+		set_badges = function(self, card, badges)
+			if self.discovered then
+				badges[1].nodes[1].nodes[2].config.object:remove()
+				badges[1] = create_badge("Moon?", get_type_colour(self or card.config, card), nil, 1.2)
+				return badges
+			end
+		end,
+		load_check = function()
+			return next(SMODS.find_mod('SixSuits'))
+		end,
+	},
 	'nice_planet', nice_planet = {
 		name = "Cancer",
 		subtitle = "The Tumor",
@@ -1743,15 +1791,7 @@ local spectrals = {
 		use = function(_, self, area, copier)
 			local used_tarot = copier or self
 			-- destroy a random joker
-			local deletable_jokers = {}
-			for k, v in pairs(G.jokers.cards) do
-				if not v.ability.eternal then deletable_jokers[#deletable_jokers + 1] = v end
-			end
-			local chosen_joker = nil
-			if #deletable_jokers > 0 then
-				chosen_joker = pseudorandom_element(deletable_jokers, pseudoseed('mischief_and_mayhem'))
-				G.E_MANAGER:add_event(Event({trigger = 'before', delay = 0.75, func = function() chosen_joker:start_dissolve(nil); return true end }))
-			end
+			AMM.destroy_random_jokers(G.jokers.cards, 1)
 			delay(0.6)
 			-- add stamps to the rest
 			for k, v in ipairs(G.jokers.cards) do
@@ -1960,30 +2000,11 @@ local spectrals = {
 			"{C:inactive}(Each card will receive the same {C:red}Aspect{C:inactive})"
 		},
 		config = { },
-		pos = {x = 9, y = 6},
+		pos = {x = 0, y = 5},
 		use = function(_, self, area, copier)
 			local used_tarot = copier or self
 			-- destroy a random joker
-			local deletable_jokers = {}
-			for k, v in pairs(G.jokers.cards) do
-				if not v.ability.eternal then deletable_jokers[#deletable_jokers + 1] = v end
-			end
-			local chosen_joker = nil
-			local chosen_joker_2 = nil
-			if #deletable_jokers > 1 then
-				chosen_joker = pseudorandom_element(deletable_jokers, pseudoseed('ascend'))
-				chosen_joker_2 = pseudorandom_element(deletable_jokers, pseudoseed('ascend'))
-
-				while chosen_joker == chosen_joker_2 do
-					chosen_joker_2 = pseudorandom_element(deletable_jokers, pseudoseed('ascend'))
-				end
-
-				G.E_MANAGER:add_event(Event({trigger = 'before', delay = 0.15, func = function() chosen_joker:start_dissolve(nil); return true end }))
-				G.E_MANAGER:add_event(Event({trigger = 'before', delay = 0.60, func = function() chosen_joker_2:start_dissolve(nil); return true end }))
-			else
-				chosen_joker = pseudorandom_element(deletable_jokers, pseudoseed('ascend'))
-				G.E_MANAGER:add_event(Event({trigger = 'before', delay = 0.75, func = function() chosen_joker:start_dissolve(nil); return true end }))
-			end
+			AMM.destroy_random_jokers(G.jokers.cards, 2)
 			delay(0.6)
 			local keyset={}
 			local n=0
