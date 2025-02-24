@@ -230,9 +230,61 @@ position = "after"
 payload = '''
 	for i=#G.graveyard,1,-1 do
 		if SMODS.has_enhancement(G.graveyard[i], "m_thac_soulbound") then
+			G.graveyard[i].ability.perma_mult = G.graveyard[i].ability.perma_mult + 2
 			G.graveyard[i]:move_from_graveyard(G.deck)
 		end
 	end
+'''
+match_indent = true
+overwrite = false
+
+
+# graveyard (twisted mind) calc
+[[patches]]
+[patches.pattern]
+target = 'functions/state_events.lua'
+pattern = '''
+--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++--
+--Joker Effects
+'''
+position = "before"
+payload = '''
+if next(SMODS.find_card("j_thac_twisted_mind")) then
+	delay(0.3)
+	local context = {cardarea = G.hand, full_hand = G.play.cards, scoring_hand = scoring_hand, scoring_name = text, poker_hands = poker_hands}
+	for _, card2 in ipairs(G.graveyard_area.cards) do
+		SMODS.score_card(card2, context)
+	end
+	delay(0.3)
+end
+'''
+match_indent = true
+overwrite = false
+
+# patch pokermon's silver seal to not work when triggered by twisted mind
+# this is both for balance reasons and because it breaks shit lol
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Pokermon "seals/seals1.lua"]'
+pattern = '''
+if context.cardarea == G.hand and not context.repetition_only and context.scoring_hand and not card.ability.discarded and check_main_scoring(context.main_scoring) then
+'''
+position = "before"
+payload = '''
+if card.area ~= G.graveyard_area then
+'''
+match_indent = true
+overwrite = false
+[[patches]]
+[patches.pattern]
+target = '=[SMODS Pokermon "seals/seals1.lua"]'
+pattern = '''
+  delay(0.3)
+end
+'''
+position = "after"
+payload = '''
+end
 '''
 match_indent = true
 overwrite = false
