@@ -11,6 +11,7 @@ TheAutumnCircus.mod.optional_features = function()
 		retrigger_joker = true,
         quantum_enhancements = true,
         cardareas = {
+            unscored = true,
             --graveyard = true,
         },
         amm = {
@@ -239,6 +240,14 @@ NFS.load(TheAutumnCircus.mod.path.."modules/compatibility.lua")()
 for _, v in pairs(TheAutumnCircus.INIT) do
 	if v and type(v) == 'function' then v() end
 end
+
+-- yes i am in fact loading this twice
+SMODS.Atlas{
+	key = "modicon",
+	path = "TagImIt.png",
+	px = 34,
+	py = 34,
+}
 
 -- Register game objects
 TheAutumnCircus.data.register_objects()
